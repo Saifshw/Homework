@@ -15,7 +15,9 @@
 <body>
 	<form id="form1" runat="server">
 	<div class="LoginHolder">
-		<h1>Login</h1>
+		<h1>
+			<asp:Image ID="UserImage" runat="server" Visible="False" Width="50px" />
+			Login</h1>
 		<asp:TextBox ID="txtUser" placeholder="Username" runat="server"></asp:TextBox>
 		<p>
 			<asp:TextBox ID="txtPass" placeholder="Password" runat="server"></asp:TextBox>	
@@ -23,7 +25,9 @@
 		<p>
 			<asp:Button ID="Button1" runat="server" Text="Login" OnClick="Button1_Click" />
 		</p>
-		<asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="Please fill in all fields" ControlToValidate="txtPass"></asp:RequiredFieldValidator>
+		<asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="Please fill in all fields" ControlToValidate="txtUser"></asp:RequiredFieldValidator>
+		<br />
+		<asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ErrorMessage="Please fill in all fields" ControlToValidate="txtPass"></asp:RequiredFieldValidator>
 		<br />
 		<asp:Label ID="ErrorLabel" runat="server" Visible="False"></asp:Label>
 		</div>

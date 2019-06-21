@@ -19,18 +19,22 @@ public partial class Login : System.Web.UI.Page
 
 	protected void Button1_Click(object sender, EventArgs e)
 	{
-		RequiredFieldValidator1.Validate();
+		SetElementsVisibility(false);
+		Page.Validate();
 
 		string Username = txtUser.Text;
 		string Password = txtPass.Text;
+
+		if(Username == string.Empty || Password == string.Empty) {
+			ShowError("Please fill all fields");
+			return;
+		}
 
 		CheckInput(Username, Password);
 	}
 
 	protected void CheckInput(string User, string Pass)
 	{
-		ErrorLabel.Visible = false;
-
 		SqlConnection dbConnection = new SqlConnection(ConnectionString);
 		SqlCommand SelectUser = new SqlCommand(SelectUserCommand, dbConnection);
 		SqlDataReader Reader;
@@ -41,27 +45,40 @@ public partial class Login : System.Web.UI.Page
 			Reader = SelectUser.ExecuteReader();
 			Reader.Read();
 
+			// Username not found
 			if (!Reader.HasRows) {
-				ShowError("Username Not found");
+				ShowError("Username Not found <br> <a href='Register.aspx'>Register?</a>");
 				return;
 			};
 
 			// Pass and user are right
 			if (Reader["Password"].ToString() == Pass) {
-
+				Session["LoginId"] = (int)Reader["Id"];
+				Session["LoginUser"] = (string)Reader["Username"];
+				RedirectUserToPage((bool)Reader["UserType"]);
 			} else { // User right but pass isnt
 				ShowError("Welcome " + User +", your password is incorrect");
+				UserImage.ImageUrl = Reader["Image"].ToString();
+				UserImage.Visible = true;
 				return;
 			}
 
-				Reader.Close();
+			Reader.Close();
 		}
-		catch (Exception ex) {
-
-			
+		catch (Exception) {
+			ShowError("Something happened");
 		}
 		finally {
 			dbConnection.Close();
+		}
+	}
+
+	private void RedirectUserToPage(bool IsAdmin)
+	{
+		if (IsAdmin == true) {
+			Response.Redirect("admin_cpanel.aspx");
+		} else {
+			Response.Redirect("UserProfile.aspx");
 		}
 	}
 
@@ -72,6 +89,7 @@ public partial class Login : System.Web.UI.Page
 	}
 
 	protected void SetElementsVisibility(bool IsVisible) {
-
+		ErrorLabel.Visible = IsVisible;
+		UserImage.Visible = IsVisible;
 	}
 }
