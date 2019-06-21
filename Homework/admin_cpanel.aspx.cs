@@ -12,7 +12,20 @@ public partial class admin_cpanel : System.Web.UI.Page
 		if(Session["LoginId"] == null) {
 			Response.Redirect("Login.aspx");
 		}
-		string Username = Session["LoginId"].ToString();
+		string Username = Session["LoginUser"].ToString();
 		lblWelcome.Text = "Welcome, " + Username;
+
+		UserImage.ImageUrl = Session["LoginImage"].ToString();
+	}
+
+	protected void btnLogout_Click(object sender, EventArgs e)
+	{
+		Session.Abandon();
+		Response.Redirect("Login.aspx");
+	}
+
+	protected void btnSearch_Click(object sender, EventArgs e)
+	{
+		
 	}
 }

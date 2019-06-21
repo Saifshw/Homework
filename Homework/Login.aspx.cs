@@ -54,7 +54,8 @@ public partial class Login : System.Web.UI.Page
 			// Pass and user are right
 			if (Reader["Password"].ToString() == Pass) {
 				Session["LoginId"] = (int)Reader["Id"];
-				Session["LoginUser"] = (string)Reader["Username"];
+				Session["LoginUser"] = User;
+				Session["LoginImage"] = Reader["Image"].ToString();
 				RedirectUserToPage((bool)Reader["UserType"]);
 			} else { // User right but pass isnt
 				ShowError("Welcome " + User +", your password is incorrect");
@@ -65,8 +66,8 @@ public partial class Login : System.Web.UI.Page
 
 			Reader.Close();
 		}
-		catch (Exception) {
-			ShowError("Something happened");
+		catch (Exception ex) {
+			ShowError("Something happened: "+ex.Message);
 		}
 		finally {
 			dbConnection.Close();

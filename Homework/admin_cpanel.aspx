@@ -9,7 +9,7 @@
 <body>
     <form id="form1" runat="server">
         <div>
-        	<asp:Image ID="Image1" runat="server" Width="50px" />
+        	<asp:Image ID="UserImage" runat="server" Width="80px" />
 			<asp:Label ID="lblWelcome" runat="server" Text="Welcome, "></asp:Label>
         </div>
 		<div>
@@ -218,7 +218,16 @@
 					</tr>
 				</SelectedItemTemplate>
 			</asp:ListView>
+
+			<br />
 		</div>
+		<div>
+
+			<asp:TextBox ID="TextBox1" runat="server"></asp:TextBox>
+			<asp:Button ID="Button1" runat="server" Text="Button" />
+
+		</div>
+			<asp:Button ID="btnLogout" runat="server" OnClick="btnLogout_Click" Text="Logout" />
     </form>
 </body>
 </html>
