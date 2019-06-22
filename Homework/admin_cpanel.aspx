@@ -224,7 +224,188 @@
 		<div>
 
 			<asp:TextBox ID="TextBox1" runat="server"></asp:TextBox>
-			<asp:Button ID="Button1" runat="server" Text="Button" />
+			<asp:Button ID="Button1" runat="server" Text="Search" OnClick="Button1_Click" />
+
+			<br />
+			<asp:Panel ID="SearchPanel" runat="server" Visible="False">
+			</asp:Panel>
+			<asp:ListView ID="ListView1" runat="server" DataKeyNames="Id" DataSourceID="ListViewSource">
+				<AlternatingItemTemplate>
+					<tr style="background-color:#FFF8DC;">
+						<td>
+							<asp:Label ID="IdLabel" runat="server" Text='<%# Eval("Id") %>' />
+						</td>
+						<td>
+							<asp:Label ID="UsernameLabel" runat="server" Text='<%# Eval("Username") %>' />
+						</td>
+						<td>
+							<asp:Label ID="PasswordLabel" runat="server" Text='<%# Eval("Password") %>' />
+						</td>
+						<td>
+							<asp:Label ID="FirstNameLabel" runat="server" Text='<%# Eval("FirstName") %>' />
+						</td>
+						<td>
+							<asp:Label ID="LastNameLabel" runat="server" Text='<%# Eval("LastName") %>' />
+						</td>
+						<td>
+							<asp:Label ID="ImageLabel" runat="server" Text='<%# Eval("Image") %>' />
+						</td>
+						<td>
+							<asp:CheckBox ID="UserTypeCheckBox" runat="server" Checked='<%# Eval("UserType") %>' Enabled="false" />
+						</td>
+					</tr>
+				</AlternatingItemTemplate>
+				<EditItemTemplate>
+					<tr style="background-color:#008A8C;color: #FFFFFF;">
+						<td>
+							<asp:Button ID="UpdateButton" runat="server" CommandName="Update" Text="Update" />
+							<asp:Button ID="CancelButton" runat="server" CommandName="Cancel" Text="Cancel" />
+						</td>
+						<td>
+							<asp:Label ID="IdLabel1" runat="server" Text='<%# Eval("Id") %>' />
+						</td>
+						<td>
+							<asp:TextBox ID="UsernameTextBox" runat="server" Text='<%# Bind("Username") %>' />
+						</td>
+						<td>
+							<asp:TextBox ID="PasswordTextBox" runat="server" Text='<%# Bind("Password") %>' />
+						</td>
+						<td>
+							<asp:TextBox ID="FirstNameTextBox" runat="server" Text='<%# Bind("FirstName") %>' />
+						</td>
+						<td>
+							<asp:TextBox ID="LastNameTextBox" runat="server" Text='<%# Bind("LastName") %>' />
+						</td>
+						<td>
+							<asp:TextBox ID="ImageTextBox" runat="server" Text='<%# Bind("Image") %>' />
+						</td>
+						<td>
+							<asp:CheckBox ID="UserTypeCheckBox" runat="server" Checked='<%# Bind("UserType") %>' />
+						</td>
+					</tr>
+				</EditItemTemplate>
+				<EmptyDataTemplate>
+					<table runat="server" style="background-color: #FFFFFF;border-collapse: collapse;border-color: #999999;border-style:none;border-width:1px;">
+						<tr>
+							<td>No data was returned.</td>
+						</tr>
+					</table>
+				</EmptyDataTemplate>
+				<InsertItemTemplate>
+					<tr style="">
+						<td>
+							<asp:Button ID="InsertButton" runat="server" CommandName="Insert" Text="Insert" />
+							<asp:Button ID="CancelButton" runat="server" CommandName="Cancel" Text="Clear" />
+						</td>
+						<td>&nbsp;</td>
+						<td>
+							<asp:TextBox ID="UsernameTextBox" runat="server" Text='<%# Bind("Username") %>' />
+						</td>
+						<td>
+							<asp:TextBox ID="PasswordTextBox" runat="server" Text='<%# Bind("Password") %>' />
+						</td>
+						<td>
+							<asp:TextBox ID="FirstNameTextBox" runat="server" Text='<%# Bind("FirstName") %>' />
+						</td>
+						<td>
+							<asp:TextBox ID="LastNameTextBox" runat="server" Text='<%# Bind("LastName") %>' />
+						</td>
+						<td>
+							<asp:TextBox ID="ImageTextBox" runat="server" Text='<%# Bind("Image") %>' />
+						</td>
+						<td>
+							<asp:CheckBox ID="UserTypeCheckBox" runat="server" Checked='<%# Bind("UserType") %>' />
+						</td>
+					</tr>
+				</InsertItemTemplate>
+				<ItemTemplate>
+					<tr style="background-color:#DCDCDC;color: #000000;">
+						<td>
+							<asp:Label ID="IdLabel" runat="server" Text='<%# Eval("Id") %>' />
+						</td>
+						<td>
+							<asp:Label ID="UsernameLabel" runat="server" Text='<%# Eval("Username") %>' />
+						</td>
+						<td>
+							<asp:Label ID="PasswordLabel" runat="server" Text='<%# Eval("Password") %>' />
+						</td>
+						<td>
+							<asp:Label ID="FirstNameLabel" runat="server" Text='<%# Eval("FirstName") %>' />
+						</td>
+						<td>
+							<asp:Label ID="LastNameLabel" runat="server" Text='<%# Eval("LastName") %>' />
+						</td>
+						<td>
+							<asp:Label ID="ImageLabel" runat="server" Text='<%# Eval("Image") %>' />
+						</td>
+						<td>
+							<asp:CheckBox ID="UserTypeCheckBox" runat="server" Checked='<%# Eval("UserType") %>' Enabled="false" />
+						</td>
+					</tr>
+				</ItemTemplate>
+				<LayoutTemplate>
+					<table runat="server">
+						<tr runat="server">
+							<td runat="server">
+								<table id="itemPlaceholderContainer" runat="server" border="1" style="background-color: #FFFFFF;border-collapse: collapse;border-color: #999999;border-style:none;border-width:1px;font-family: Verdana, Arial, Helvetica, sans-serif;">
+									<tr runat="server" style="background-color:#DCDCDC;color: #000000;">
+										<th runat="server">Id</th>
+										<th runat="server">Username</th>
+										<th runat="server">Password</th>
+										<th runat="server">FirstName</th>
+										<th runat="server">LastName</th>
+										<th runat="server">Image</th>
+										<th runat="server">UserType</th>
+									</tr>
+									<tr id="itemPlaceholder" runat="server">
+									</tr>
+								</table>
+							</td>
+						</tr>
+						<tr runat="server">
+							<td runat="server" style="text-align: center;background-color: #CCCCCC;font-family: Verdana, Arial, Helvetica, sans-serif;color: #000000;">
+								<asp:DataPager ID="DataPager1" runat="server">
+									<Fields>
+										<asp:NextPreviousPagerField ButtonType="Button" ShowFirstPageButton="True" ShowLastPageButton="True" />
+									</Fields>
+								</asp:DataPager>
+							</td>
+						</tr>
+					</table>
+				</LayoutTemplate>
+				<SelectedItemTemplate>
+					<tr style="background-color:#008A8C;font-weight: bold;color: #FFFFFF;">
+						<td>
+							<asp:Label ID="IdLabel" runat="server" Text='<%# Eval("Id") %>' />
+						</td>
+						<td>
+							<asp:Label ID="UsernameLabel" runat="server" Text='<%# Eval("Username") %>' />
+						</td>
+						<td>
+							<asp:Label ID="PasswordLabel" runat="server" Text='<%# Eval("Password") %>' />
+						</td>
+						<td>
+							<asp:Label ID="FirstNameLabel" runat="server" Text='<%# Eval("FirstName") %>' />
+						</td>
+						<td>
+							<asp:Label ID="LastNameLabel" runat="server" Text='<%# Eval("LastName") %>' />
+						</td>
+						<td>
+							<asp:Label ID="ImageLabel" runat="server" Text='<%# Eval("Image") %>' />
+						</td>
+						<td>
+							<asp:CheckBox ID="UserTypeCheckBox" runat="server" Checked='<%# Eval("UserType") %>' Enabled="false" />
+						</td>
+					</tr>
+				</SelectedItemTemplate>
+			</asp:ListView>
+			<asp:SqlDataSource ID="ListViewSource" runat="server" ConnectionString="<%$ ConnectionStrings:dbConnection %>" SelectCommand="SELECT * FROM [Login] WHERE (([FirstName] LIKE '%' + @FirstName + '%') OR ([LastName] LIKE '%' + @LastName + '%') OR ([Username] LIKE '%' + @Username + '%'))">
+				<SelectParameters>
+					<asp:ControlParameter ControlID="TextBox1" Name="FirstName" PropertyName="Text" Type="String" />
+					<asp:ControlParameter ControlID="TextBox1" Name="LastName" PropertyName="Text" Type="String" />
+					<asp:ControlParameter ControlID="TextBox1" Name="Username" PropertyName="Text" Type="String" />
+				</SelectParameters>
+			</asp:SqlDataSource>
 
 		</div>
 			<asp:Button ID="btnLogout" runat="server" OnClick="btnLogout_Click" Text="Logout" />

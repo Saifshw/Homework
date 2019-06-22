@@ -20,12 +20,13 @@ public partial class admin_cpanel : System.Web.UI.Page
 
 	protected void btnLogout_Click(object sender, EventArgs e)
 	{
+		Session.Clear();
 		Session.Abandon();
 		Response.Redirect("Login.aspx");
 	}
 
-	protected void btnSearch_Click(object sender, EventArgs e)
+	protected void Button1_Click(object sender, EventArgs e)
 	{
-		
+		SearchPanel.Visible = true;
 	}
 }
